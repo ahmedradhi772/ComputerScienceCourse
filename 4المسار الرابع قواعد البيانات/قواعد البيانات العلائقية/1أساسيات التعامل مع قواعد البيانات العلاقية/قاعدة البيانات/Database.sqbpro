@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="Database.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="564"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="Students" custom_title="0" dock_id="5" table="4,8:mainStudents"/><dock_state state="000000ff00000000fd00000001000000020000039100000260fc0100000004fb000000160064006f0063006b00420072006f00770073006500310100000000000003910000000000000000fb000000180064006f0063006b00420072006f007700730065003100320100000000000003910000000000000000fb000000160064006f0063006b00420072006f00770073006500340100000000000002480000000000000000fb000000160064006f0063006b00420072006f00770073006500350100000000000003910000012300ffffff000003910000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Students" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort><column index="0" mode="1"/></sort><column_widths><column index="1" value="71"/><column index="2" value="79"/><column index="3" value="39"/><column index="4" value="47"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="createTable">/*CREATE TABLE Table_name(
+  Column1,
+  Column2,
+  Column3,
+  …
+)*/
+
+/*CREATE TABLE Students(
+  FirsName TEXT,
+  LastName TEXT,
+  Age INTEGER,
+  Class TEXT
+)*/</sql><sql name="INSERT">/*INSERT INTO Table_name(Column1, Column2, Column3, …) VALUES (Value1, Value2, Value3, …)*/
+
+--INSERT INTO Students(FirstName, LastName, Age, Class) VALUES (&quot;Ahmed&quot;, &quot;radhi&quot;, 24, &quot;Five&quot;)</sql><sql name="SELECT">/*SELECT * FROM Table_name*/
+--SELECT * FROM Students*/
+
+/*SELECT Column1, Column2, Column3, … FROM Table_name*/
+
+--SELECT FirsName, Age, Class FROM Students*/
+
+/*SELECT
+FirsName, Age
+FROM Students*/</sql><sql name="WHERE,LIMIT">/*SELECT * FROM Table_name WHERE Column = Value*/
+
+/*SELECT * FROM Students WHERE Class = &quot;five&quot;*/
+
+/*SELECT FirsName, LastName FROM Students WHERE Age = 11*/
+
+
+/*SELECT * FROM Table_name LIMIT Results_count*/
+
+/*SELECT * FROM Students LIMIT 5*/
+
+/*SELECT * FROM Students LIMIT 4, 2*/
+
+
+</sql><sql name="Comparison Operators">--SELECT * FROM Table_name WHERE Column !,&gt;= Value
+
+--SELECT * FROM Students WHERE Age != 11
+
+--SELECT * FROM Students WHERE Age &lt;&gt; 11 -- a هذا السطر نفس السطر الأعلوي 
+
+--SELECT * FROM Students WHERE Age &gt;= 12*/</sql><sql name="AND,OR">--Logical Operators
+
+/*SELECT * FROM Table_name WHERE Column1 = Value AND Column2 = Value*/
+
+--SELECT * FROM Students WHERE FirsName = &quot;ibrahim&quot; AND Class = &quot;four&quot;
+
+/*SELECT * FROM Table_name WHERE Column1 = Value OR Column2 &gt;= Value*/
+
+--SELECT * FROM Students WHERE FirsName = &quot;ibrahim&quot; or Class = &quot;four&quot;
+
+
+
+</sql><sql name="LIKE و IN و NOT">/*SELECT * FROM Table_name WHERE Column Like &quot;_H_%&quot;*/
+
+--SELECT * FROM Students WHERE FirstName Like &quot;A%&quot; -- A اعرض الاسماء التي تبدا بحرف هذا
+
+--SELECT * FROM Students WHERE FirstName Like &quot;%d&quot; -- d اعرض الاسماء التي تنتهي بالحرف هذا
+
+--SELECT * FROM Students WHERE LastName Like &quot;Anas%&quot;
+
+--SELECT * FROM Students WHERE LastName Like &quot;_o_%&quot; -- Show the names whose second letter is o
+
+--The problem is that it says to display all names that start with the letter M and end with the letter D.
+--SELECT * FROM Students WHERE FirstName Like &quot;m%&quot; and FirstName Like &quot;%d&quot;
+
+--SELECT * FROM Students WHERE FirstName Like &quot;m%&quot; and FirstName not like &quot;%d&quot;
+
+/*SELECT * FROM Table_name WHERE Column IN (Value1, Value2, Value3, …)*/
+--SELECT * FROM Students WHERE age in (9, 11, 10)
+
+
+/*SELECT * FROM Table_name WHERE Column NOT IN (Value1, Value2, Value3, …)*/
+SELECT * FROM Students WHERE age not in (9, 11, 10)
+
+</sql><sql name=" BETWEEN و Is Null">/*SELECT * FROM Table_name WHERE Column BETWEEN Start_value AND End_value*/
+--SELECT * FROM Students WHERE age BETWEEN 11 AND 12
+
+/*SELECT * FROM Table_name WHERE Column IS NULL*/
+--SELECT * FROM Students WHERE class IS NULL
+
+/*SELECT * FROM Table_name WHERE Column IS NOT NULL*/
+--SELECT * FROM Students WHERE class IS NOT NULL
+</sql><sql name="ORDER BY">/*SELECT * FROM Table_name ORDER BY Column ASC هذه الكلمة ترتب النتائج تصاعديا */
+--SELECT * FROM Students ORDER BY age ASC 
+
+/*SELECT * FROM Table_name ORDER BY Column1,Column2 DESC*/
+--SELECT FirstName, age FROM Students ORDER BY age DESC -- DESC هذه الكلمات ترتب الكلمات تصاعديا 
+--SELECT age, FirstName FROM Students ORDER BY 1 DESC
+
+
+
+</sql><sql name="UPDATE">/*UPDATE Table_name
+SET Column1 = Value, Column2 = Value, …
+WHERE Column3 = Value*/
+
+/*UPDATE Students
+SET 
+	FirstName = &quot;ahmed&quot;,
+	LastName = &quot;radhi&quot;,
+	age = 24,
+	class= &quot;seven&quot;
+WHERE FirstName = &quot;radhi&quot;AND LastName =&quot;ahmed&quot;*/</sql><sql name="DELETE">/* DELETE FROM Table_name WHERE Column = Value*/
+DELETE FROM Students WHERE
+FirstName IS NULL AND
+LastName IS NULL AND
+age IS NULL AND 
+class IS NULL 
+
+/*DELETE * FROM Table_name
+or :-
+ DELETE FROM Table_name*/
+
+
+</sql><sql name="problem1*">/*SELECT FirstName, LastName, age
+	FROM Students
+	WHERE FirstName like &quot;m%&quot;
+	ORDER BY 3 DESC*/</sql><sql name="problem2*">/*UPDATE Students
+SET 
+	LastName = &quot;hasan&quot;,
+	age = 13,
+	class= &quot;eight&quot;
+WHERE FirstName = &quot;ola&quot;AND LastName =&quot;Anas&quot;*/</sql><current_tab id="12"/></tab_sql></sqlb_project>

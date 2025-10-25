@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="ahmed.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1478"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="Customers" custom_title="0" dock_id="1" table="4,9:mainCustomers"/><dock_state state="000000ff00000000fd00000001000000020000054a00000257fc0100000001fb000000160064006f0063006b00420072006f007700730065003101000000000000054a0000011e00ffffff0000054a0000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Courses" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort><column index="4" mode="1"/></sort><column_widths><column index="1" value="59"/><column index="2" value="87"/><column index="3" value="103"/><column index="4" value="59"/><column index="5" value="99"/><column index="6" value="79"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Customers" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="76"/><column index="2" value="63"/><column index="3" value="68"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="OldStudents" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="65"/><column index="2" value="65"/><column index="3" value="64"/><column index="4" value="49"/><column index="5" value="143"/><column index="6" value="95"/><column index="7" value="79"/><column index="8" value="61"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Students" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort><column index="0" mode="0"/></sort><column_widths><column index="1" value="35"/><column index="2" value="65"/><column index="3" value="71"/><column index="4" value="49"/><column index="5" value="45"/><column index="6" value="75"/><column index="7" value="35"/><column index="8" value="61"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="installments" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="88"/><column index="2" value="53"/><column index="3" value="77"/><column index="4" value="87"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="Courses">/*CREATE TABLE &quot;Courses&quot; (
+	&quot;CourseId&quot; INTEGER PRIMARY KEY,
+	&quot;CourseNmae&quot; TEXT,
+	&quot;Lecturer&quot; TEXT,
+	&quot;Price&quot; INTEGER,
+	&quot;DepartementName&quot; TEXT,
+	&quot;Head&quot; TEXT
+
+)*/
+</sql><sql name="students">CREATE TABLE &quot;Students&quot; (
+	&quot;StudentId&quot; INTEGER PRIMARY KEY,
+	&quot;FirstNmae&quot; TEXT,
+	&quot;LastName&quot; TEXT,
+	&quot;Gender&quot; TEXT,
+	&quot;Email&quot; TEXT,
+	&quot;RegDate&quot; TEXT,
+	&quot;PhoneNO&quot; INTEGER,
+	&quot;CourseId&quot; INTEGER, 
+	FOREIGN KEY (CourseId) REFERENCES Courses (CourseId)
+
+)</sql><sql name="AddToTable">/*INSERT INTO Courses (CourseId, CourseName, Lecturer, Price, DepartementName, Head)
+VALUES
+(111, 'PHP', 'Dr. Ahmed Ali', 400, 'Computer Science', 'Prof. Mona Hassan'),
+(222, 'JavaScript', 'Dr. Sara Mahmoud', 450, 'Computer Science', 'Prof. Mona Hassan'),
+(333, 'Ruby', 'Mr. Khaled Omar', 350, 'Software Engineering', 'Prof. Samir Youssef');*/
+
+/*INSERT INTO Students (FirstName, LastName, Gender, Email, RegDate, PhoneNO, CourseId)
+VALUES 
+('Ahmed', 'Ali', 'Male', 'ahmed.ali@example.com', '2025-10-19', 1234567890, 9999);*/</sql><sql name="INNER JOIN">SELECT Courses.CourseName,
+       Courses.Price,
+	   Students.FirstName,
+	   Students.LastName,
+	   Students.RegDate,
+	   Courses.Head
+FROM Courses
+INNER JOIN Students
+on Students.CourseId = Courses.CourseId
+
+/*SELECT Courses.CourseName,
+       Courses.Price,
+	   Students.FirstName,
+	   Students.LastName,
+	   Students.RegDate
+FROM Courses JOIN Students
+on Students.CourseId = Courses.CourseId
+WHERE CourseName = &quot;PHP&quot;*/</sql><sql name="LEFT JOIN">SELECT Courses.CourseName,
+       Courses.Price,
+	   Students.FirstName,
+	   Students.LastName,
+	   Students.RegDate
+FROM Courses -- Left Table
+LEFT JOIN Students -- Right Table
+on Students.CourseId = Courses.CourseId</sql><sql name="UNION">/*SELECT FirstName FROM Students WHERE Gender = &quot;Woman&quot;
+UNION
+SELECT CourseName FROM Courses*/
+
+SELECT * FROM Students 
+UNION
+SELECT * FROM Students </sql><sql name="Sub-queries*">--aاعرض اسم الدورة مع عدد الطلاب الذين اشتركوا فيها
+SELECT CourseName,
+(
+	SELECT count(*) FROM Students
+	WHERE Students.CourseId = Courses.CourseId
+)
+As number
+FROM Courses
+
+--aاعرض جميع معلومات الدورات التدريبيه التي اشترك فيه االطلاب
+/*SELECT * FROM Courses
+WHERE CourseId IN (SELECT CourseId FROM Students)*/
+
+</sql><sql name="Sub-queries2">--aاضف جدول الطلاب القدماء في جدول الطلاب باستخدام الاستعلامات الفرعية
+
+INSERT INTO Students (FirstName, LastName, Gender, email, RegDate, PhoneNo, CourseId)
+SELECT FirstName, LastName, Gender, email, RegDate, PhoneNo, CourseId from OldStudents</sql><sql name="تمرين الوحدة">/*-- إنشاء جدول العملاءa
+CREATE TABLE Customers (
+    CustomerID INTEGER PRIMARY KEY,
+    Name TEXT NOT NULL,
+    Remaining INTEGER
+);*/
+
+-- إنشاء جدول a
+/*CREATE TABLE installments (
+    TransactionID INTEGER PRIMARY KEY,
+    Amount INTEGER NOT NULL,
+    CustomerID INTEGER,
+    Date TEXT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);*/
+
+-- إدخال بيانات a
+/*INSERT INTO Customers (CustomerID, Name, Remaining) VALUES
+(1111, 'Hasan', 5000),
+(2222, 'Hiba', 6000),
+(3333, 'Mohamad', 7500),
+(4444, 'Hiba', 10000),
+(5555, 'Ibrahim', 2000),
+(6666, 'Ahmad', 5000),
+(7777, 'Hasan', 4500);*/
+
+-- إدخال بيانات a
+/*INSERT INTO installments (TransactionID, Amount, CustomerID, Date) VALUES
+(1, 450, 1111, '2020-10-05'),
+(2, 300, 2222, '2020-11-09'),
+(3, 700, 1111, '2020-06-05'),
+(4, 300, 3333, '2020-10-15'),
+(5, 500, 4444, '2020-11-05'),
+(6, 450, 5555, '2020-11-05'),
+(7, 350, 6666, '2020-06-20'),
+(8, 250, 7777, '2020-11-05'),
+(9, 150, 6666, '2020-07-08'),
+(10, 400, 5555, '2020-11-25'),
+(11, 700, 2222, '2020-10-02');
+*/
+UPDATE Customers set Remaining = Remaining -
+(
+	SELECT Amount
+	FROM installments
+	WHERE Customers.CustomerID = installments.CustomerID
+)
+
+
+</sql><sql name="delete from Table">delete from Students where StudentId = 83
+</sql><current_tab id="6"/></tab_sql></sqlb_project>
